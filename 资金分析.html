@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资金逻辑分析</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+        background-color: #f5f7fa;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+    .container {
+        width: 100%;
+        max-width: 800px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        padding: 30px;
+        border: 1px solid #e1e4e8;
+    }
+    h1, h2 {
+        text-align: center;
+        color: #1a2a4c;
+        border-bottom: 2px solid #e1e4e8;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .actors {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .actor {
+        text-align: center;
+        padding: 10px;
+    }
+    .actor span {
+        display: block;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+    .step {
+        margin-bottom: 25px;
+        padding: 15px;
+        border-left: 4px solid #007bff;
+        position: relative;
+        background: #fdfdff;
+    }
+    .step:before {
+        content: attr(data-step);
+        position: absolute;
+        left: -18px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 32px;
+        height: 32px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 1.1em;
+        border: 2px solid white;
+        box-shadow: 0 0 10px rgba(0,123,255,0.3);
+    }
+    .step-content {
+        margin-left: 20px;
+    }
+    .flow {
+        font-weight: bold;
+        font-size: 1.1em;
+        margin: 5px 0;
+        text-align: center;
+        padding: 8px;
+        border-radius: 6px;
+    }
+    .flow.in { background-color: #e6ffed; color: #28a745; }
+    .flow.out { background-color: #ffebee; color: #dc3545; }
+    .flow.misc { background-color: #fff3e0; color: #ff9800; }
+
+    .misunderstanding {
+        border: 2px dashed #dc3545;
+        background-color: #fff8f8;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 6px;
+    }
+    .misunderstanding strong { color: #dc3545; }
+
+    .analysis {
+        background-color: #eef7ff;
+        border: 1px solid #b3d7ff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+    }
+    .analysis ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+     .analysis li {
+        padding-left: 25px;
+        position: relative;
+        margin-bottom: 8px;
+    }
+    .analysis li:before {
+        content: '✓';
+        color: #28a745;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+
+    .conclusion {
+        padding: 20px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        text-align: center;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+    .conclusion h2 {
+        color: white;
+        border: none;
+        margin: 0;
+        padding: 0;
+        font-size: 1.8em;
+    }
+    .conclusion p {
+        font-size: 1.2em;
+        margin: 5px 0 0 0;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>资金逻辑分析</h1>
+    
+    <h2>涉及人员</h2>
+    <div class="actors">
+        <div class="actor"><span>明轻</span>(技术支持人员)</div>
+        <div class="actor"><span>泪水</span>(客户)</div>
+        <div class="actor"><span>老李</span>(技术支持人员)</div>
+        <div class="actor"><span>第三人</span>(债务人)</div>
+    </div>
+
+    <div class="step" data-step="1">
+        <div class="step-content">
+            <h3>初始约定</h3>
+            <p>项目总价 <strong>200元</strong>，约定好由客户【泪水】支付。</p>
+            <p>【明轻】的分成：100元<br>【老李】的分成：100元</p>
+        </div>
+    </div>
+
+    <div class="step" data-step="2">
+        <div class="step-content">
+            <h3>【泪水】首次付款</h3>
+            <p>【泪水】分两次，向【明轻】支付了共 <strong>100元</strong>。</p>
+            <div class="flow in">【泪水】 → 100元 → 【明轻】</div>
+        </div>
+    </div>
+    
+    <div class="step" data-step="3">
+        <div class="step-content">
+            <h3>意外的还款 & 核心误解</h3>
+            <p>【第三人】（之前欠明轻钱的人）还给明轻 <strong>90元</strong>。</p>
+            <div class="flow misc">【第三人】 → 90元 → 【明轻】</div>
+            <div class="misunderstanding">
+                <strong>关键误解：</strong> 明轻当时以为这90元是【泪水】打过来的。
+            </div>
+        </div>
+    </div>
+
+    <div class="step" data-step="4">
+        <div class="step-content">
+            <h3>基于误解的付款</h3>
+            <p>因为一些原因，【老李】的酬劳变为 <strong>80元</strong>。</p>
+            <p>【明轻】在以为收到【泪水】共190元（100+90）的情况下，把80元打给了【老李】，结清了他的部分。</p>
+            <div class="flow out">【明轻】 → 80元 → 【老李】</div>
+            <div class="analysis">
+                <h4>逻辑分析：</h4>
+                <ul>
+                    <li>这笔支付给【老李】的80元，是在【明轻】发现真相后，实际上动用了【明轻】自己的资金（即“第三人”还【明轻】的90元）。</li>
+                    <li>所以，可以理解为【明轻】为项目垫付了 <strong>80元</strong> 给【老李】。</li>
+                    <li>因此，【明轻】需要从【泪水】那里收回：【明轻】自己的100元酬劳 + 【明轻】垫付给老李的80元 = <strong>180元</strong>。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="step" data-step="5">
+        <div class="step-content">
+            <h3>【泪水】再次付款</h3>
+            <p>【泪水】又打给【明轻】 <strong>20元</strong>，并让【明轻】转给【老李】。</p>
+            <div class="flow in">【泪水】 → 20元 → 【明轻】</div>
+            <p>但实际上，【老李】的80元已经由【明轻】结清，所以这20元无需再给【老李】，应视为【泪水】偿还【明轻】所欠总款项的一部分。</p>
+        </div>
+    </div>
+
+    <div class="conclusion">
+        <h2>最终结论</h2>
+        <p>1. 【泪水】总共应支付 <strong>200元</strong>。</p>
+        <p>2. 【泪水】已累计支付：100元 + 20元 = <strong>120元</strong>。</p>
+        <p>3. 因此，【泪水】还需支付的尾款为：200元 - 120元 = <strong>60元</strong>。</p>
+    </div>
+
+</div>
+
+</body>
+</html>
